@@ -11,7 +11,7 @@ module FlavourSaver
         r = []
         count = 0
         collection.each do |element|
-          r << yield.contents(element, 'index' => count)
+          r << yield.contents(element, 'index' => count, 'first' => count == 0, 'last' => count == collection.size - 1)
           count += 1
         end
         yield.rendered!
