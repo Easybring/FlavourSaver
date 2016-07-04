@@ -27,9 +27,13 @@ module FlavourSaver
         end
       end
 
-      def exec_if(value, exptected)
-        truthy = false if value.respond_to?(:size) && (value.size == 0)
-        truthy = (value == expected)
+      def exec_if(value, expected)
+        if value.respond_to?(:size) && (value.size == 0)
+          truthy = false
+        else
+          truthy = (value == expected)
+        end
+        
         if truthy
           yield.contents
         else
