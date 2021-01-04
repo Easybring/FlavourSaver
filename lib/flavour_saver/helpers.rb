@@ -92,7 +92,7 @@ module FlavourSaver
         # I would rather have it raise a NameError, but Moustache
         # compatibility requires that missing helpers return
         # nothing. A good place for bugs to hide.
-        @source.send(name, *args, &b) if @source.respond_to? name
+        @source.send(name, *args, &b) if @source.respond_to?(name) && name != :system
       end
     end
 
