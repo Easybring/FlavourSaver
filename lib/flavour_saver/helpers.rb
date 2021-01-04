@@ -11,7 +11,10 @@ module FlavourSaver
         r = []
         count = 0
         collection.each do |element|
-          r << yield.contents(element, 'index' => count, 'first' => count == 0, 'last' => count == collection.size - 1)
+          r << yield.contents(element, 
+            'index' => count, 
+            'last' => count == collection.size - 1, 
+            'first' => count == 0)
           count += 1
         end
         yield.rendered!
@@ -89,7 +92,7 @@ module FlavourSaver
         # I would rather have it raise a NameError, but Moustache
         # compatibility requires that missing helpers return
         # nothing. A good place for bugs to hide.
-        @source.send(name, *args, &b) if @source.respond_to? name
+        @source.send(name, *args, &b) if @source.respond_to?(name) && name != :system
       end
     end
 
